@@ -144,3 +144,17 @@ However, for this assignment you are not responsible for lambda expressions. Arg
      'LBRACE',       # {           | 'TRUE',         # TRUE
      'LE',           # <=          | 'VAR',          # var 
      'LPAREN',       # (           |
+
+(4)  Complexity of Parsing:  Because every HTML webpage and bit of embedded JavaScript must be parsed before it can be rendered, the efficiency of parsing is of critical importance. In the past, computer scientists and linguists developed special restricted classes of grammars that could be parsed rapidly. The memoization approach to parsing that we used in this class is named Earley's Algorithm after its inventor. It can handle any context-free grammar, but it is not always very efficient. In fact, if the size of the webpage is X tokens, it can sometimes take as many as X*X*X (i.e., X cubed) operations to determine if the string is in the language of the grammar or not. That would be really bad, because it means that if the size of your webpage doubles, it would take 8 times longer to load! That's not how you build a scalable business. (Later courses on computer science theory and the analysis and complexity of algorithms will provide you with the tools to determine why it could perform X*X*X but not X*X*X*X operations in the worst case. For now, simply assume it is true.) Since the exact time it takes to execute a program depends on your particular hardware, we will measure operations. In particular, every time our parser has to look over our grammar rules to compute the closure, if there are X grammar rules we charge it for X units of work. Similarly, whenever our parser has to look back at chart[j] to to reductions, if there are Y states in chart[j] we charge it for Y units of work. For this problem you should define a grammar and a list of tokens so that parsing the tokens requires at least 2*X*X*X "work operations" (as defined above), where X is the number of input tokens, the number of grammar rules, or the size of the largest grammar rule. In addition, you must find a answer where X > 10 (we want to see real poor performance, not a small corner case on tiny input) and also where X < 50 (to avoid overloading our grading servers).  
+
+        Hint 1: You can make parsing take more time by increasing the size of the input string, but since that also increases X, you 
+        can't solve this problem with that alone. We're interested in seeing worst-case performance in proportion to the size of the 
+        input. 
+
+        Hint 2: This problem is intentionally open-ended. Computer science involves creativity. Make up some grammars and try them out. 
+
+        Hint 3: It doesn't even matter if your token string is in the language of the grammar or not. But if it's not, our parser often 
+        finds that out very early, so that probably won't be the example of poor performance you're looking for.
+
+        Hint 4: Think about the concept from class that gave us the most difficulty when parsing and interpreting natural languages and 
+        computer languages alike. If you can think of such a thing, try to put a lot of it in your counter-example! 
