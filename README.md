@@ -157,4 +157,26 @@ However, for this assignment you are not responsible for lambda expressions. Arg
         finds that out very early, so that probably won't be the example of poor performance you're looking for.
 
         Hint 4: Think about the concept from class that gave us the most difficulty when parsing and interpreting natural languages and 
-        computer languages alike. If you can think of such a thing, try to put a lot of it in your counter-example! 
+        computer languages alike. If you can think of such a thing, try to put a lot of it in your counter-example!
+
+(5) Terrible Tuples:  In this problem you will use context-free grammars to specify some expression for part of a new programming language. We will specify tuples and lists, as in Python. We will consider four types of expressions.
+
+    (i) An expression can be a single NUMBER token. In this case, your parser should return ("number",XYZ) where XYZ is the value of the 
+    NUMBER token.
+
+    (ii) An expression can be LPAREN expression RPAREN . In this case, your parser should return the value of the expression inside the 
+    parentheses.
+
+    (iii) An expression can be LPAREN "a list of more than one comma-separated expressions" RPAREN. This should remind you of tuples in 
+    Python:
+
+               (1,2,3) 
+
+The inner expressions are (i) (ii) and (iii), and they are separated by commas. In this case, your parser should return ("tuple", ...) where ... is a list of the child expression values. For example, for (1,2) you should return ("tuple",[("number",2),("number",3)]). 
+
+    (iv) An expression can be LBRACKET "a list of one or more comma-separated expressions" RBRACKET. This should remind you of lists in 
+    Python:
+
+               [7,8,9] 
+
+These parse exactly like tuples, except that they use square brackets instead of parentheses, and singleton lists like [7] are valid. Your parser should return ("list", ...) as above, so [7,8] would return ("list",[("number",7),("number",8)]). 
