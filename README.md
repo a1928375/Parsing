@@ -180,3 +180,28 @@ The inner expressions are (i) (ii) and (iii), and they are separated by commas. 
                [7,8,9] 
 
 These parse exactly like tuples, except that they use square brackets instead of parentheses, and singleton lists like [7] are valid. Your parser should return ("list", ...) as above, so [7,8] would return ("list",[("number",7),("number",8)]). 
+
+(6) Implementing RE:  In this problem you will write a lexer, parser and interpreter for strings representing regular expressions. Your program will output a non-deterministic finite state machine that accepts the same language as that regular expression. For example, on input 
+
+     ab*c
+
+Your program might output
+ 
+     edges = { (1,'a')  : [ 2 ] ,
+               (2,None) : [ 3 ] ,    # epsilon transition
+               (2,'b')  : [ 2 ] ,
+               (3,'c')  : [ 4 ] } 
+               
+    accepting = [4]
+
+    start = 1
+
+We will consider the following regular expressions:
+
+       single characters       #       a       
+       regexp1 regexp2         #       ab
+       regexp *                #       a*
+       regexp1 | regexp2       #       a|b
+       ( regexp )              #       (a|b)* -- same as (?:a|b) 
+
+That's it. We won't consider [a-c] because it's just a|b|c, and we won't consider a+ because it's just aa*. We will not worry about escape sequences. Single character can be a-z, A-Z or 0-9 -- that's it. No need to worry about strange character encodings. We'll use ( ) for regular expression grouping instead of (?: ) just to make the problem simpler. Don't worry about precedence or associativity. We'll fully parenthesize all regular expressions before giving them to you.  You will write a procedure re_to_nfsm(re_string). It takes as input a single argument -- a string representing a regular expression. It returns a tuple (edges,accepting,start) corresponding to an NSFM that accepts the same language as that regular expression. Hint: Make a lexer and a paser and an interpreter. Your interpreter may find it handy to know the current state and the goal state. Make up as many new states as you need. 
