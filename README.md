@@ -1,5 +1,7 @@
 # Parsing
 
+(1) Optional Arguments: 
+
 JavaScript allows function calls:
     
     myfun(11,12)
